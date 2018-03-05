@@ -15,7 +15,7 @@ public class AnalizadorAccesosAServidor
     }
 
     /**
-     * Analiza un fichero de log con el formato (AAAA MM DD hh mm).
+     * Analiza un fichero de log con el formato (Ip AAAA MM DD hh mm web codServ).
      * @param archivo la ruta, relativa o absoluta, incluyendo la extension del archivo. 
      */
     public void analizarArchivoDeLog(String archivo)
@@ -95,9 +95,43 @@ public class AnalizadorAccesosAServidor
         return valorADevolver;
     }
 
+    /**
+     * Devuelve la ip con mas accesos exitosos y la muestra por pantalla.
+     * @return Devuelve la ip con mas accesos  exitosos, si no hay accesos devuelve null.
+     */
     public String clienteConMasAccesosExitosos()
     {
-        return "";
+        String valorADevolver = null;
+        int masRepetidas= 0;
+        int numIpMasAlto=0;
+        if (accesos.size()>0) {           
+            for (Acceso accesoActual : accesos) {
+                if(accesoActual.getCodServ()== 200)
+                {
+                    String ipActual = accesoActual.getIp();
+                    int repetidas= 0;               
+                    int numIpActual= Integer.parseInt(ipActual.substring(10,ipActual.length()));
+                    for(int i= 0;i< accesos.size(); i++)
+                    {
+                        if(ipActual.equals(accesos.get(i).getIp()) && accesos.get(i).getCodServ()== 200)
+                        {
+                            repetidas++;
+                        }
+                    }
+                    if(masRepetidas == repetidas && numIpMasAlto < numIpActual)
+                    {valorADevolver= ipActual;
+                        masRepetidas = repetidas;
+                        numIpMasAlto= numIpActual;                
+                    }
+                    else if(masRepetidas< repetidas)
+                    {
+                        valorADevolver= ipActual;
+                        masRepetidas = repetidas;
+                        numIpMasAlto= numIpActual;
+                    }                
+                }
+            }
+        }
+        return valorADevolver;
     }
-
 }

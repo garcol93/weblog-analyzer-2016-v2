@@ -27,11 +27,11 @@ public class Acceso
     {
         String[] strings = texto.split(" ");
         this.ip = strings[0];
-        this.ano = Integer.parseInt(strings[1].substring(1,4));
+        this.ano = Integer.parseInt(strings[1].substring(1,5));
         this.mes =Integer.parseInt(strings[2]);
         this.dia = Integer.parseInt(strings[3]);
         this.hora =Integer.parseInt(strings[4]);
-        this.minutos = Integer.parseInt(strings[5].substring(0,1));
+        this.minutos = Integer.parseInt(strings[5].substring(0,2));
         this.pagWeb = strings[6];
         this.codServ = Integer.parseInt(strings[7]);
     }
