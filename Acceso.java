@@ -6,25 +6,43 @@
  * @version 2018/03/05
  */
 public class Acceso
-{
+{   
+    //direccion ip
+    private String ip;
     private int ano;
     private int mes;
     private int dia;
     private int hora;
     private int minutos;
+    //direccion pagina web
+    private String pagWeb;
+    //codigo cel servidor 200 exito 403fallo
+    private int codServ;
 
     /**
      * Construye objetos Acceso.
-     * @param String con fecha y hora completa
+     * @param String con direccion ip, fecha, hora, min, pagina web y codigo servidor
      */
     public Acceso(String texto)
     {
-        String[] strings = texto.split(" ");                
-        this.ano = Integer.parseInt(strings[0]);
-        this.mes =Integer.parseInt(strings[1]);
-        this.dia = Integer.parseInt(strings[2]);
-        this.hora =Integer.parseInt(strings[3]);
-        this.minutos = Integer.parseInt(strings[4]);
+        String[] strings = texto.split(" ");
+        this.ip = strings[0];
+        this.ano = Integer.parseInt(strings[1].substring(1,4));
+        this.mes =Integer.parseInt(strings[2]);
+        this.dia = Integer.parseInt(strings[3]);
+        this.hora =Integer.parseInt(strings[4]);
+        this.minutos = Integer.parseInt(strings[5].substring(0,1));
+        this.pagWeb = strings[6];
+        this.codServ = Integer.parseInt(strings[7]);
+    }
+
+    /**
+     * Devuelve la ip en el que se ha producido el Acceso al servidor.
+     * @return Devuelve la ip en el que se ha producido el Acceso al servidor.
+     */
+    public String getIp()
+    {
+        return ip;
     }
 
     /**
@@ -71,5 +89,23 @@ public class Acceso
     public int getMinutos()
     {
         return minutos;
+    }
+
+    /**
+     * Devuelve la direccion web en el que se ha producido el Acceso al servidor.
+     * @return Devuelve la direccion web en el que se ha producido el Acceso al servidor.
+     */
+    public String getPagWeb()
+    {
+        return pagWeb;
+    }
+
+    /**
+     * Devuelve el codigo del servidor en el que se ha producido el Acceso.
+     * @return Devuelve el codigo del servidor en el que se ha producido el Acceso.
+     */
+    public int getCodServ()
+    {
+        return codServ;
     }
 }
