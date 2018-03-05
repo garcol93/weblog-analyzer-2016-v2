@@ -66,10 +66,33 @@ public class AnalizadorAccesosAServidor
         return valorADevolver;
     }
 
-    
+    /**
+     * Devuelve la web con mas accesos y la muestra por pantalla.
+     * @return Devuelve la web con mas accesos, si no hay accesos devuelve null.
+     */
     public String paginaWebMasSolicitada() 
     {
-        return "";
+        String valorADevolver = null;
+        int masRepetidas= 0;
+        if (accesos.size()>0) {           
+            for (Acceso accesoActual : accesos) {
+                String webActual = accesoActual.getPagWeb();
+                int repetidas= 0;
+                for(int i= 0;i< accesos.size(); i++)
+                {
+                    if(webActual.equals(accesos.get(i).getPagWeb()))
+                    {
+                        repetidas++;
+                    }
+                }
+                if(masRepetidas<= repetidas)
+                {
+                    valorADevolver= webActual;
+                    masRepetidas = repetidas;
+                }                
+            }
+        }
+        return valorADevolver;
     }
 
     public String clienteConMasAccesosExitosos()
